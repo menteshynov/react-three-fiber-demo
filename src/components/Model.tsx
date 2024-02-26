@@ -1,4 +1,5 @@
 import { useGLTF } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { GLTF } from 'three-stdlib';
 
@@ -21,9 +22,10 @@ type GLTFResult = GLTF & {
 
 function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/Panel.glb') as GLTFResult;
+  const { viewport } = useThree();
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={viewport.width / 6}>
       <mesh
         castShadow
         receiveShadow
